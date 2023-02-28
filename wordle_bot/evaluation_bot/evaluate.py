@@ -1,30 +1,12 @@
-# from implementation.utils import vocab_util
-
-ALL_VOCAB_FILENAME = "five_letter_words.pickle"
-PICKLE_FOLDER_PATH = "../data/"
-
-#TODO - move to utils
-import pickle, os
-def read_valid_vocab(filename = ALL_VOCAB_FILENAME):
-    words = []
-    filepath = os.path.join(PICKLE_FOLDER_PATH, filename)
-    with (open(filepath, "rb")) as openfile:
-      words = pickle.load(openfile)
-    
-    # print(len(words))
-    return words
-
-corpus = read_valid_vocab(ALL_VOCAB_FILENAME)
-
-# ---- 
-    
 from enum import Enum
+from wordle_bot.utils import VocabUtil
+
 class Colour(Enum):
     GRAY = 0
     YELLOW = 1
     GREEN = 2
 
-class EvalutionBot:
+class EvaluationBot:
     def __init__(self) -> None:
         pass
 
@@ -50,13 +32,12 @@ class EvalutionBot:
             trie.insert_word(word)
         return trie
         
-    def is_valid_word(self, word, corpus = corpus):
+    def is_valid_word(self, word, corpus):
         trie = self.create_trie(corpus)
         return trie.search_word(word)
 
 
 class Trie:
-
     def __init__(self):
         self.alp = dict()
         self.term = False
