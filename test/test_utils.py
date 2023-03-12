@@ -30,12 +30,15 @@ class VocabUtilTest(unittest.TestCase):
 class PrioritizeVocabUtilTest(unittest.TestCase):
     def test_non_duplicate(self):
         # TODO
+        pass
 
     def test_letter_frequency_same_index(self):
         # TODO
+        pass
 
     def test_letter_frequency_cross_index(self):
         # TODO
+        pass
 
 if __name__ == '__main__':
     unittest.main()
