@@ -2,7 +2,7 @@ class Vn_DS:
     def __init__(self, Wn):
         pass
 
-    def update(self, wordle_row):
+    def update(self, word, colors):
         raise NotImplementedError
 
     def get_Vn(self):
