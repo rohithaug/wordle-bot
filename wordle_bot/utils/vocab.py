@@ -20,7 +20,7 @@ class VocabUtil:
         with open(filepath, 'wb') as f:
             pickle.dump(five_letter_words, f)
 
-    def read_valid_vocab(self, filename: str = ALL_VOCAB_FILENAME, folder: str = DATA_FOLDER_PATH) -> [str]:
+    def read_valid_vocab(self, filename: str = ALL_VOCAB_FILENAME, folder: str = DATA_FOLDER_PATH) -> str:
         words = []
         filepath = os.path.join(folder, filename)
 
@@ -34,7 +34,7 @@ class PrioritizeVocabUtil:
     def __init__(self) -> None:
         pass
 
-    def non_duplicate(self, words: [str], indexes: [int]) -> [str]:
+    def non_duplicate(self, words: str, indexes: int) -> str:
         """
         Prioritizes words based on the number of duplicates in the given indexes of each word.
         """
@@ -53,7 +53,7 @@ class PrioritizeVocabUtil:
         sorted_words = [word for _, word in sorted(zip(num_duplicates, words))]
         return sorted_words
 
-    def letter_frequency_same_index(self, words: [str], indexes: [int]) -> [str]:
+    def letter_frequency_same_index(self, words: str, indexes: int) -> str:
         """
         Prioritizes words based on the frequency of letters in the given indexes of each word.
         """
@@ -76,7 +76,7 @@ class PrioritizeVocabUtil:
         sorted_words = [word for _, word in sorted(zip(avg_freq, words), reverse=True)]
         return sorted_words
 
-    def letter_frequency_cross_index(self, words: [str], indexes: [int]) -> [str]:
+    def letter_frequency_cross_index(self, words: str, indexes: int) -> str:
         """
         Prioritizes words based on the frequency of letters across all indexes of each word.
         """
