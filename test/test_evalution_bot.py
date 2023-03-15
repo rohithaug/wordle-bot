@@ -9,23 +9,23 @@ DATA_FOLDER_PATH = "././data/"
 ALL_VOCAB_FILENAME = "five_letter_words.pickle"
 
 class EvaluationBotTest(unittest.TestCase):
-    def test_evaluate_guessed_word(self):
+    def test_evaluate_guessed_word_optimal(self):
         evaluation_bot = EvaluationBot()
 
-        res = evaluation_bot.evaluate_guessed_word("APPLE", "apple")
-        assert res == [Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value]
+        res = evaluation_bot.evaluate_guessed_word_optimal("APPLE", "apple")
+        assert res == [Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value], True
 
-        res = evaluation_bot.evaluate_guessed_word("mAnGo", "MANGO")
-        assert res == [Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value]
+        res = evaluation_bot.evaluate_guessed_word_optimal("mAnGo", "MANGO")
+        assert res == [Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value, Colour.GREEN.value], True
 
-        res = evaluation_bot.evaluate_guessed_word("puppy", "funny")
-        assert res == [Colour.GRAY.value, Colour.GREEN.value, Colour.GRAY.value, Colour.GRAY.value, Colour.GREEN.value]
+        res = evaluation_bot.evaluate_guessed_word_optimal("puppy", "funny")
+        assert res == [Colour.GRAY.value, Colour.GREEN.value, Colour.GRAY.value, Colour.GRAY.value, Colour.GREEN.value], True
 
-        res = evaluation_bot.evaluate_guessed_word("puppy", "apple")
-        assert res == [Colour.YELLOW.value, Colour.GRAY.value, Colour.GREEN.value, Colour.YELLOW.value, Colour.GRAY.value]
+        res = evaluation_bot.evaluate_guessed_word_optimal("puppy", "apple")
+        assert res == [Colour.YELLOW.value, Colour.GRAY.value, Colour.GREEN.value, Colour.YELLOW.value, Colour.GRAY.value], True
 
-        res = evaluation_bot.evaluate_guessed_word("zzzzz", "apple")
-        assert res == [Colour.GRAY.value, Colour.GRAY.value, Colour.GRAY.value, Colour.GRAY.value, Colour.GRAY.value]
+        res = evaluation_bot.evaluate_guessed_word_optimal("zzzzz", "apple")
+        assert res == [Colour.GRAY.value, Colour.GRAY.value, Colour.GRAY.value, Colour.GRAY.value, Colour.GRAY.value], True
 
     def test_is_valid_word(self):
         vocalUtil = VocabUtil()
@@ -44,6 +44,10 @@ class EvaluationBotTest(unittest.TestCase):
 
         res = evaluation_bot.is_valid_word("ball", corpus)
         assert res == False
+
+    def test_graph_creation():
+        evaluation_bot = EvaluationBot()
+        evaluation_bot.create_time_graph()
 
 if __name__ == '__main__':
     unittest.main()
