@@ -1,6 +1,6 @@
 class Vn_DS:
     def __init__(self, Wn):
-        self.Wn = Wn
+        pass
 
     def update(self, wordle_row):
         raise NotImplementedError
@@ -13,7 +13,6 @@ class Player:
     def __init__(self, Wn, VN_DS, brute_force=False):
         self.brute_force = brute_force
         self.Vn_structure = VN_DS(Wn)
-        self.Wn = Wn
 
     def get_next_guess(self):
         raise NotImplementedError

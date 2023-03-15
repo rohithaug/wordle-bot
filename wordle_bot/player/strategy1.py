@@ -6,6 +6,7 @@ class PlayerStrategy1(Player):
         self.brute_force = brute_force
         self.Vn_structure = Vn_ds(Wn)
         self.Wn = Wn
+        super().__init__(Wn, Vn_ds, brute_force)
     
     def update_game_state(self, wordle_row):
         self.Vn_structure.update(wordle_row)
