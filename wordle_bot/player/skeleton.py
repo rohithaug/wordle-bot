@@ -10,13 +10,12 @@ class Vn_DS:
 
 
 class Player:
-    def __init__(self, Wn, VN_DS, brute_force=False):
-        self.brute_force = brute_force
-        self.Vn_structure = VN_DS(Wn)
-
+    def __init__(self, Wn, Vn_DS, brute_force=False):
+        pass
+    
     def get_next_guess(self):
         raise NotImplementedError
 
-    def update_game_state(self, wordle_row):
+    def update_game_state(self, word, colors):
         raise NotImplementedError
 
