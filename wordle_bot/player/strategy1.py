@@ -5,8 +5,10 @@ class PlayerStrategy1(Player):
     def __init__(self, Wn, Vn_ds = Vn_DS, brute_force=False):
         super().__init__(Vn_ds, brute_force)
     
-    def update_game_state(self, wordle_row):
-        self.Vn_structure.update(wordle_row)
+    def update_game_state(self, word, colors):
+        self.Vn_structure.update(word, colors)
+        self.word = word
+        self.colors = colors
 
     def get_next_guess(self):
         if self.brute_force:

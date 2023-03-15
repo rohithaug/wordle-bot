@@ -17,6 +17,6 @@ class Player:
     def get_next_guess(self):
         raise NotImplementedError
 
-    def update_game_state(self, wordle_row):
+    def update_game_state(self, word, colors):
         raise NotImplementedError
 
