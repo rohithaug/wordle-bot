@@ -1,6 +1,6 @@
+from .skeleton import Player
 
-
-class PlayerStrategy1:
+class PlayerStrategy1(Player):
     def __init__(self, Wn, Vn_ds, brute_force=False):
         self.brute_force = brute_force
         self.Vn_structure = Vn_ds
