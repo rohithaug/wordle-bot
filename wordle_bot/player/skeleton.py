@@ -10,9 +10,9 @@ class Vn_DS:
 
 
 class Player:
-    def __init__(self, Wn, Vn_DS, brute_force=False):
+    def __init__(self, Wn = None, Vn_DS = None, brute_force=False):
         pass
-    
+
     def get_next_guess(self):
         raise NotImplementedError
 
