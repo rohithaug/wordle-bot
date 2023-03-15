@@ -1,9 +1,10 @@
 from .skeleton import Player
+from .skeleton import Vn_DS
 
 class PlayerStrategy1(Player):
-    def __init__(self, Wn, Vn_ds, brute_force=False):
+    def __init__(self, Wn, Vn_ds = Vn_DS, brute_force=False):
         self.brute_force = brute_force
-        self.Vn_structure = Vn_ds
+        self.Vn_structure = Vn_ds(Wn)
         self.Wn = Wn
     
     def update_game_state(self, wordle_row):
