@@ -25,11 +25,11 @@ def update_game_state(guess, win_word, game):
             new_attempt.append([letter, 1])
 
     # append new attempt to game state
-    game.append(new_attempt)
+    #game.append(new_attempt)
     
-    return game
+    return new_attempt
 
-def get_Vn(game, Vn_copy, verbose=True):
+def get_Vn(last_attempt, Vn_copy, verbose=True):
     """
     :param game: Game state is a mxnx2 matrix .
     Each row contains each word attempt.
@@ -83,9 +83,9 @@ def best_next_guess(game, Vn, Wn):
     for i, guess in enumerate(Wn):
         for win in Vn:
             # update game state
-            game_temp = update_game_state(guess, win, game)
+            attempt = update_game_state(guess, win, game)
             # get new Vn
-            new_Vn = get_Vn(game_temp, Vn)
+            new_Vn = get_Vn(attempt, Vn)
             # calculate Vn reduction
             Vn_reduction = len(Vn) - len(new_Vn)
             # update Vn reduction score
