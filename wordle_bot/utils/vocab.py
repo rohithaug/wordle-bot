@@ -20,7 +20,7 @@ class VocabUtil:
         with open(filepath, 'wb') as f:
             pickle.dump(five_letter_words, f)
 
-    def read_valid_vocab(self, filename: str = ALL_VOCAB_FILENAME, folder: str = DATA_FOLDER_PATH) -> [str]:
+    def read_valid_vocab(self, filename: str = ALL_VOCAB_FILENAME, folder: str = DATA_FOLDER_PATH) -> str:
         words = []
         filepath = os.path.join(folder, filename)
 
@@ -34,62 +34,65 @@ class PrioritizeVocabUtil:
     def __init__(self) -> None:
         pass
 
-    def non_duplicate(self, words: [str], indexes: [int]) -> [str]:
-        # calculate the number of duplicates for each word
+    def non_duplicate(self, words: str, indexes: int) -> str:
+        """
+        Prioritizes words based on the number of duplicates in the given indexes of each word.
+        """
+        # Count the number of duplicates for each word
         num_duplicates = []
         for word in words:
-            seen = set()
-            duplicates = []
-
+            duplicates = set()
             for i in indexes:
                 letter = word[i]
-                if letter in seen:
-                    duplicates.append(letter)
-                else:
-                    seen.add(letter)
-
+                if letter in duplicates:
+                    continue
+                duplicates.add(letter)
             num_duplicates.append(len(duplicates))
-        
-        # sort the words based on the number of duplicates
+
+        # Sort the words based on the number of duplicates
         sorted_words = [word for _, word in sorted(zip(num_duplicates, words))]
         return sorted_words
 
-    def letter_frequency_same_index(self, words: [str], indexes: [int]) -> [str]:
+    def letter_frequency_same_index(self, words: str, indexes: int) -> str:
+        """
+        Prioritizes words based on the frequency of letters in the given indexes of each word.
+        """
         # initialize a dictionary to store the frequency of each letter in the indexes
         freq_dict = {i: {} for i in indexes}
 
-        # calculate the frequency of letters in the indexes for each word
+        # Count the frequency of letters in the indexes for each word
         for word in words:
             for i in indexes:
                 letter = word[i]
                 freq_dict[i][letter] = freq_dict[i].get(letter, 0) + 1
 
-        # calculate the average frequency for each word
+        # Calculate the average frequency for each word
         avg_freq = []
         for word in words:
             total_freq = sum([freq_dict[i].get(word[i], 0) for i in indexes])
             avg_freq.append(total_freq / len(indexes))
-        
-        # sort the words based on their average frequency
+
+        # Sort the words based on their average frequency
         sorted_words = [word for _, word in sorted(zip(avg_freq, words), reverse=True)]
         return sorted_words
 
-    def letter_frequency_cross_index(self, words: [str], indexes: [int]) -> [str]:
-        # initialize a dictionary to store the frequency of each letter
+    def letter_frequency_cross_index(self, words: str, indexes: int) -> str:
+        """
+        Prioritizes words based on the frequency of letters across all indexes of each word.
+        """
+        # Count the frequency of letters in the indexes for each word
         freq_dict = {}
-
-        # calculate the frequency of letters in the indexes for each word
         for word in words:
             for i in indexes:
                 letter = word[i]
                 freq_dict[letter] = freq_dict.get(letter, 0) + 1
 
-        # calculate the average frequency for each word
+        # Calculate the average frequency for each word
         avg_freq = []
         for word in words:
             total_freq = sum([freq_dict.get(word[i], 0) for i in indexes])
             avg_freq.append(total_freq / len(indexes))
-        
-        # sort the words based on their average frequency
+
+        # Sort the words based on their average frequency
         sorted_words = [word for _, word in sorted(zip(avg_freq, words), reverse=True)]
         return sorted_words
