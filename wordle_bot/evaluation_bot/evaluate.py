@@ -13,7 +13,7 @@ ALL_VOCAB_FILENAME = "five_letter_words.pickle"
 # from wordle_bot.evaluation_bot.evaluate import EvaluationBot
 import random
 
-N_ITERATIONS = 10000
+N_ITERATIONS = 10000000000
 
 class Colour(Enum):
     GRAY = 0
@@ -24,6 +24,7 @@ class EvaluationBot:
     def __init__(self, DATA_FOLDER_PATH, ALL_VOCAB_FILENAME) -> None:
         vocalUtil = VocabUtil()
         self.corpus = vocalUtil.read_valid_vocab(ALL_VOCAB_FILENAME, DATA_FOLDER_PATH)
+        self.trie = self.create_trie(self.corpus)
 
     def invalid_word_response(self):
         return [], False
@@ -69,8 +70,7 @@ class EvaluationBot:
         return trie
         
     def is_valid_word(self, word):
-        trie = self.create_trie(self.corpus)
-        return trie.search_word(word)
+        return self.trie.search_word(word)
 
 
     # function to create a time graph for comparing brute_force and evaluate_guessed_word_optimal
@@ -101,7 +101,7 @@ class EvaluationBot:
         plt.xlabel("Number of word guesses")
         plt.ylabel("Time taken")
         plt.legend()
-        plt.show()
+        # plt.show()
         print("plot created")
 
         # save the plot as time_graph.png
