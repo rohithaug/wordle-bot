@@ -68,23 +68,24 @@ class Vn_reduction(Vn_DS):
     def get_Vn(self):
         return self.Vn
 
-vn_red = Vn_reduction(corpus)
-v =vn_red.update('slate', [0, 0, 0, 0, 0])
-v =vn_red.update('bingo', [0, 0, 0, 0, 0])
-v =vn_red.update('furzy', [0, 2, 0, 0, 2])
-v =vn_red.update('yucky', [1, 2, 0, 0, 2])
-v =vn_red.update('dumpy', [0, 2, 0, 2, 2])
+if __name__ == "__main__":
+    vn_red = Vn_reduction(corpus)
+    v =vn_red.update('slate', [0, 0, 0, 0, 0])
+    v =vn_red.update('bingo', [0, 0, 0, 0, 0])
+    v =vn_red.update('furzy', [0, 2, 0, 0, 2])
+    v =vn_red.update('yucky', [1, 2, 0, 0, 2])
+    v =vn_red.update('dumpy', [0, 2, 0, 2, 2])
 
-print(vn_red.get_Vn())
+    print(vn_red.get_Vn())
 
-def time_check1():
-    vn_red.reset()
-    vn_red.update(np.random.choice(corpus), np.random.randint(0, 3, 5))
+    def time_check1():
+        vn_red.reset()
+        vn_red.update(np.random.choice(corpus), np.random.randint(0, 3, 5))
 
-def time_check2():
-    vn_red.reset()
-    vn_red.update2(np.random.choice(corpus), np.random.randint(0, 3, 5))
+    def time_check2():
+        vn_red.reset()
+        vn_red.update2(np.random.choice(corpus), np.random.randint(0, 3, 5))
 
-# print(timeit.timeit("time_check1()", setup="from __main__ import time_check1", number=1000))
+    print(timeit.timeit("time_check1()", setup="from __main__ import time_check1", number=1000))
 
-# print(timeit.timeit("time_check2()", setup="from __main__ import time_check2", number=1000))
+    print(timeit.timeit("time_check2()", setup="from __main__ import time_check2", number=1000))
