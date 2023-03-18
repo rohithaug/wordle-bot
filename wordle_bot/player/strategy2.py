@@ -3,6 +3,7 @@ import pickle
 from enum import Enum
 from skeleton import Player
 from skeleton import Vn_DS
+import matplotlib.pyplot as plt
 
 class Colour(Enum):
     GRAY = 0
@@ -261,10 +262,15 @@ def get_color_word(words, colors):
     return "".join(color_word)
 
 if __name__ == "__main__":
+    # filepath = os.path.join(DATA_FOLDER_PATH, "number_guesses.pickle")
+    # with (open(filepath, "rb")) as openfile:
+    #     num_guesses = pickle.load(openfile)
+    # print(num_guesses)
+
     Wn = read_valid_vocab(VALID_WORDLE_WORDS_FILENAME, DATA_FOLDER_PATH)
     Vn = Vn_reduction(Wn)
 
-    num_guesses = 0
+    num_guesses = {}
     num = 0
     for word in Wn[::-1]:
         # print("\n---------------------------------------\n")
@@ -277,20 +283,50 @@ if __name__ == "__main__":
             guess_word = player2.get_next_guess()
             [color, _] = get_letter_colours(guess_word, correct_word)
             color_word = get_color_word(guess_word, color)
-            # print(f"Guess {1}: {guess_word}, colors: {color_word}")
+            print(f"Guess {i}: {guess_word}, colors: {color_word}")
             Vn.update(guess_word, color)
             len2 = len(Vn.get_Vn())
-            # print(f"Len of in Vn reduced from {len1} to {len2}")
+            print(f"Len of in Vn reduced from {len1} to {len2}")
             i += 1
-        num_guesses += i
-        Vn.reset()
-        # print("Number of guesses: ", i)
-        # print("\n---------------------------------------\n")
-        num += 1
-        if num % 200 == 0:
-            print("Average number of guesses: ", num, num_guesses/num)
 
-    print("Average number of guesses: ", num_guesses/len(Wn))
+    #     num_guesses[i] = num_guesses.get(i, 0) + 1
+    #     Vn.reset()
+    #     # print("Number of guesses: ", i)
+    #     # print("\n---------------------------------------\n")
+    #     num += 1
+    #     if num % 200 == 0:
+    #         print("Average number of guesses: ", num_guesses)
+
+    # print("Average number of guesses: ", num_guesses)
+
+    # filepath = os.path.join(DATA_FOLDER_PATH, "number_guesses.pickle")
+    # with open(filepath, 'wb') as f:
+    #     pickle.dump(num_guesses, f)
+ 
+    # Create two lists from dictionary for x and y axis data
+    x = list(num_guesses.keys())
+    y = list(num_guesses.values())
+
+    # Create a histogram
+    plt.bar(x, y, alpha=0.6)
+
+    # Add labels to each bar
+    for i in range(len(x)):
+        plt.text(x[i], y[i], str(y[i]), ha='center', va='bottom', alpha=0.8)
+
+    plt.xlabel("Number of guesses")
+    plt.ylabel("Number of words")
+
+    total = 0
+    count = 0
+    for key, value in num_guesses.items():
+        total += key * value
+        count += value
+
+    print("Average number of guesses: ", total/count)
+
+    # save the plot as time_graph.png
+    plt.savefig("strategy2_hist.png")
 
 #puppy
 
